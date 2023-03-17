@@ -11,16 +11,19 @@ public class CircularLinkedList {
 		list.addToEnd(30);
 		list.addToEnd(15);
 		list.insertAtPos(2, 13);
-		list.removeFromPos(2);
+		list.print();
+		
+		System.out.println("-------");
+		list.removeFromPos(3);
 		list.print();
 	}
 }
 
- class CircularListNode {
+ class Node {
 	private int data;
-    private CircularListNode next;
+    private Node next;
 	
-    public CircularListNode(int data) {
+    public Node(int data) {
 		this.data = data;
 		this.next = null;
 	}
@@ -33,17 +36,17 @@ public class CircularLinkedList {
 		this.data = data;
 	}
 
-	public CircularListNode getNext() {
+	public Node getNext() {
 		return next;
 	}
 
-	public void setNext(CircularListNode kuyruk) {
-		this.next = kuyruk;
+	public void setNext(Node next) {
+		this.next = next;
 	}
 }
 class CircularLinkedListStructure{
-	CircularListNode head;
-	CircularListNode tail;
+	Node head;
+	Node tail;
 
 	public CircularLinkedListStructure() {
 		head = null;
@@ -51,7 +54,7 @@ class CircularLinkedListStructure{
 	}
 	
 	void addToStart(int data) {
-		CircularListNode node = new CircularListNode(data);
+		Node node = new Node(data);
 		
 		if(head == null) {
 			head = tail = node;
@@ -65,7 +68,7 @@ class CircularLinkedListStructure{
 	}
 	
 	void insertAtPos(int indis, int data) {
-		CircularListNode node = new CircularListNode(data);
+		Node node = new Node(data);
 
 		if(head == null) {
 			head = tail = node;
@@ -74,8 +77,8 @@ class CircularLinkedListStructure{
 		else if(head != null && indis == 0)
 			addToStart(data);
 		else {
-			CircularListNode temp = head;
-			CircularListNode temp2 = temp;
+			Node temp = head;
+			Node temp2 = temp;
 			int i = 0;
 			
 			while(temp.getNext() != head) {
@@ -97,7 +100,7 @@ class CircularLinkedListStructure{
 	}
 	
 	void addToEnd(int data) {
-		CircularListNode node = new CircularListNode(data);
+		Node node = new Node(data);
 		
 		if(head == null) {
 			head = tail = node;
@@ -131,14 +134,14 @@ class CircularLinkedListStructure{
 			removeFromStart();
 		}
 		else {
-			CircularListNode temp = head;
-			CircularListNode temp2 = temp;
+			Node temp = head;
+			Node temp2 = temp;
 			int i = 0;
 			while(temp.getNext() != head) {
 			
 				
 				if(i == indis) {
-					temp2.setNext(temp);
+					temp2.setNext(temp.getNext());
 				}
 				temp2 = temp;
 				temp = temp.getNext();
@@ -155,7 +158,7 @@ class CircularLinkedListStructure{
 		if(head == null) {
 			System.out.println("list is null");
 		}else {
-			CircularListNode temp = head;
+			Node temp = head;
 			while(temp.getNext() != tail) {
 				temp = temp.getNext();
 			}
@@ -167,7 +170,7 @@ class CircularLinkedListStructure{
 	
 	void print() {
 		
-		CircularListNode temp = head;
+		Node temp = head;
 		while(temp != tail) {
 			System.out.println(temp.getData());
 			temp = temp.getNext();
